@@ -2,6 +2,7 @@ package rw.gov.payroll.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import rw.gov.payroll.dto.ApiResponse;
 import rw.gov.payroll.model.Employee;
@@ -32,6 +33,7 @@ public class MessageController {
      * Get all messages
      */
     @GetMapping
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGER')")
     public ResponseEntity<?> getAllMessages() {
         List<Message> messages = messageRepository.findAll();
         return ResponseEntity.ok(ApiResponse.success("Messages retrieved successfully", messages));
@@ -41,6 +43,7 @@ public class MessageController {
      * Get messages by sent status
      */
     @GetMapping("/status/{sent}")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGER')")
     public ResponseEntity<?> getMessagesBySentStatus(@PathVariable Boolean sent) {
         List<Message> messages = messageRepository.findBySent(sent);
         return ResponseEntity.ok(ApiResponse.success(
@@ -52,6 +55,7 @@ public class MessageController {
      * Get messages for a specific employee
      */
     @GetMapping("/employee/{employeeCode}")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGER') or @securityService.isCurrentUser(#employeeCode)")
     public ResponseEntity<?> getMessagesByEmployee(@PathVariable String employeeCode) {
         Optional<Employee> employeeOpt = employeeRepository.findById(employeeCode);
         if (!employeeOpt.isPresent()) {
@@ -66,6 +70,7 @@ public class MessageController {
      * Get messages for a specific month and year
      */
     @GetMapping("/period")
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_MANAGER')")
     public ResponseEntity<?> getMessagesByPeriod(
             @RequestParam Integer month,
             @RequestParam Integer year) {
@@ -77,6 +82,7 @@ public class MessageController {
      * Send a test email to verify email configuration
      */
     @PostMapping("/test-email")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> sendTestEmail(@RequestParam String email) {
         try {
             // Create a test message
@@ -118,6 +124,7 @@ public class MessageController {
      * Force sending of all unsent messages
      */
     @PostMapping("/send-unsent")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> sendUnsentMessages() {
         try {
             List<Message> unsentMessages = messageRepository.findBySent(false);

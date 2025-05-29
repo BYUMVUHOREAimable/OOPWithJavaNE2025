@@ -193,11 +193,11 @@ public class PayrollService {
         // Calculate gross salary (base + housing + transport)
         BigDecimal grossSalary = baseSalary.add(houseAmount).add(transportAmount).setScale(2, RoundingMode.HALF_UP);
 
-        // Calculate deductions based on gross salary
-        BigDecimal employeeTaxAmount = grossSalary.multiply(employeeTaxRate).setScale(2, RoundingMode.HALF_UP);
-        BigDecimal pensionAmount = grossSalary.multiply(pensionRate).setScale(2, RoundingMode.HALF_UP);
-        BigDecimal medicalInsuranceAmount = grossSalary.multiply(medicalInsuranceRate).setScale(2, RoundingMode.HALF_UP);
-        BigDecimal otherTaxAmount = grossSalary.multiply(otherTaxRate).setScale(2, RoundingMode.HALF_UP);
+        // Calculate deductions based on base salary as per the example in the requirements
+        BigDecimal employeeTaxAmount = baseSalary.multiply(employeeTaxRate).setScale(2, RoundingMode.HALF_UP);
+        BigDecimal pensionAmount = baseSalary.multiply(pensionRate).setScale(2, RoundingMode.HALF_UP);
+        BigDecimal medicalInsuranceAmount = baseSalary.multiply(medicalInsuranceRate).setScale(2, RoundingMode.HALF_UP);
+        BigDecimal otherTaxAmount = baseSalary.multiply(otherTaxRate).setScale(2, RoundingMode.HALF_UP);
 
         // Calculate total deductions and net salary
         BigDecimal totalDeductions = employeeTaxAmount.add(pensionAmount).add(medicalInsuranceAmount).add(otherTaxAmount);

@@ -31,10 +31,18 @@ public class OpenAPIConfig {
                 .info(new Info()
                         .title("Payroll Management System API")
                         .version("1.0")
-                        .description("API documentation for the Payroll Management System")
+                        .description("API documentation for the Payroll Management System\n\n" +
+                                "## Authentication\n" +
+                                "Most endpoints require authentication. Follow these steps to authenticate:\n" +
+                                "1. Use the `/auth/login` endpoint to get a JWT token\n" +
+                                "2. Click the 'Authorize' button at the top of this page\n" +
+                                "3. Enter your JWT token with the Bearer prefix: `Bearer your_token_here`\n" +
+                                "4. Click 'Authorize' and close the dialog\n" +
+                                "5. Now you can access all secured endpoints\n\n" +
+                                "Only `/auth/login` and `/auth/register` endpoints can be accessed without authentication.")
                         .license(new License().name("Apache 2.0").url("http://springdoc.org")))
-                // Remove global security requirement to make authentication optional
-                // .addSecurityItem(new SecurityRequirement().addList(securitySchemeName))
+                // Add global security requirement for authenticated endpoints
+                .addSecurityItem(new SecurityRequirement().addList(securitySchemeName))
                 .components(new Components()
                         .addSecuritySchemes(securitySchemeName, new SecurityScheme()
                                 .name(SecurityConstants.HEADER_STRING)
