@@ -7,11 +7,13 @@ import rw.gov.payroll.dto.PaySlipDto;
 import rw.gov.payroll.model.Deduction;
 import rw.gov.payroll.model.Employee;
 import rw.gov.payroll.model.Employment;
+import rw.gov.payroll.model.Message;
 import rw.gov.payroll.model.PaySlip;
 import rw.gov.payroll.model.PaySlip.PaySlipStatus;
 import rw.gov.payroll.repository.DeductionRepository;
 import rw.gov.payroll.repository.EmployeeRepository;
 import rw.gov.payroll.repository.EmploymentRepository;
+import rw.gov.payroll.repository.MessageRepository;
 import rw.gov.payroll.repository.PaySlipRepository;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -38,6 +40,9 @@ public class PayrollService {
 
     @Autowired
     private DeductionRepository deductionRepository;
+
+    @Autowired
+    private MessageRepository messageRepository;
 
     @Autowired
     private MessageService messageService;
@@ -150,6 +155,33 @@ public class PayrollService {
         PaySlip savedPaySlip = paySlipRepository.save(paySlip);
 
         // Message generation is handled by database trigger
+        // Wait a moment for the database trigger to execute
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+
+        // Find the message that was just created by the trigger
+        List<Message> messages = messageRepository.findByEmployeeAndMonthAndYear(
+                savedPaySlip.getEmployee(), 
+                savedPaySlip.getMonth(), 
+                savedPaySlip.getYear()
+        );
+
+        // Send email for each message
+        System.out.println("Found " + messages.size() + " messages for approved pay slip ID: " + id);
+        for (Message message : messages) {
+            if (!message.getSent()) {
+                System.out.println("Sending message ID: " + message.getId() + " for pay slip ID: " + id);
+                try {
+                    messageService.sendEmailNotification(message);
+                    System.out.println("Successfully sent message ID: " + message.getId() + " for pay slip ID: " + id);
+                } catch (Exception e) {
+                    System.err.println("Error sending message ID: " + message.getId() + " - " + e.getMessage());
+                }
+            }
+        }
 
         return new PaySlipDto(savedPaySlip);
     }
@@ -160,12 +192,39 @@ public class PayrollService {
     @Transactional
     public List<PaySlipDto> approveAllPaySlips(Integer month, Integer year) {
         List<PaySlip> pendingPaySlips = paySlipRepository.findByMonthAndYearAndStatus(month, year, PaySlipStatus.PENDING);
+        System.out.println("Approving " + pendingPaySlips.size() + " pending pay slips for " + month + "/" + year);
 
         pendingPaySlips.forEach(paySlip -> paySlip.setStatus(PaySlipStatus.PAID));
 
         List<PaySlip> savedPaySlips = paySlipRepository.saveAll(pendingPaySlips);
 
         // Message generation is handled by database trigger for each updated pay slip
+        // Wait a moment for the database trigger to execute
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+
+        // Find the messages that were just created by the trigger
+        List<Message> messages = messageRepository.findByMonthAndYear(month, year);
+        System.out.println("Found " + messages.size() + " messages for approved pay slips for " + month + "/" + year);
+
+        // Send email for each message
+        int sentCount = 0;
+        for (Message message : messages) {
+            if (!message.getSent()) {
+                System.out.println("Sending message ID: " + message.getId() + " for " + month + "/" + year);
+                try {
+                    messageService.sendEmailNotification(message);
+                    System.out.println("Successfully sent message ID: " + message.getId());
+                    sentCount++;
+                } catch (Exception e) {
+                    System.err.println("Error sending message ID: " + message.getId() + " - " + e.getMessage());
+                }
+            }
+        }
+        System.out.println("Successfully sent " + sentCount + " messages for " + month + "/" + year);
 
         return savedPaySlips.stream()
                 .map(PaySlipDto::new)

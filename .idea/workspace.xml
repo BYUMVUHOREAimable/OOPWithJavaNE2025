@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b32aa465-968b-4eda-b32e-8d0e210c6e44" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rw/gov/payroll/PayrollManagementSystemApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rw/gov/payroll/PayrollManagementSystemApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rw/gov/payroll/controller/MessageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rw/gov/payroll/controller/MessageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rw/gov/payroll/service/MessageService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rw/gov/payroll/service/MessageService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/rw/gov/payroll/service/PayrollService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/rw/gov/payroll/service/PayrollService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/email-verification-guide.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/endpoint-access-roles.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/sample-users.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sample-users.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/security-testing-guide.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/security-testing-guide.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/testing-guide.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/email-verification-guide.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/endpoint-access-roles.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rw/gov/payroll/PayrollManagementSystemApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rw/gov/payroll/PayrollManagementSystemApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rw/gov/payroll/config/DatabaseInitializer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rw/gov/payroll/config/DatabaseInitializer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rw/gov/payroll/config/DatabaseTriggerInitializer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rw/gov/payroll/config/DatabaseTriggerInitializer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rw/gov/payroll/config/OpenAPIConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rw/gov/payroll/config/OpenAPIConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rw/gov/payroll/controller/AuthController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rw/gov/payroll/controller/AuthController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rw/gov/payroll/controller/DeductionController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rw/gov/payroll/controller/DeductionController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rw/gov/payroll/controller/EmployeeController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rw/gov/payroll/controller/EmployeeController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rw/gov/payroll/controller/EmploymentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rw/gov/payroll/controller/EmploymentController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rw/gov/payroll/controller/MessageController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rw/gov/payroll/controller/MessageController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rw/gov/payroll/controller/PayrollController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rw/gov/payroll/controller/PayrollController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rw/gov/payroll/dto/ApiResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rw/gov/payroll/dto/ApiResponse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rw/gov/payroll/dto/DeductionDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rw/gov/payroll/dto/DeductionDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rw/gov/payroll/dto/EmployeeDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rw/gov/payroll/dto/EmployeeDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rw/gov/payroll/dto/EmploymentDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rw/gov/payroll/dto/EmploymentDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rw/gov/payroll/dto/JwtResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rw/gov/payroll/dto/JwtResponse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rw/gov/payroll/dto/LoginRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rw/gov/payroll/dto/LoginRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rw/gov/payroll/dto/PaySlipDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rw/gov/payroll/dto/PaySlipDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rw/gov/payroll/dto/RegisterRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rw/gov/payroll/dto/RegisterRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rw/gov/payroll/model/Deduction.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rw/gov/payroll/model/Deduction.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rw/gov/payroll/model/Employee$EmployeeStatus.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rw/gov/payroll/model/Employee$EmployeeStatus.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rw/gov/payroll/model/Employee.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rw/gov/payroll/model/Employee.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rw/gov/payroll/model/Employment$EmploymentStatus.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rw/gov/payroll/model/Employment$EmploymentStatus.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rw/gov/payroll/model/Employment.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rw/gov/payroll/model/Employment.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rw/gov/payroll/model/Message.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rw/gov/payroll/model/Message.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rw/gov/payroll/model/PaySlip$PaySlipStatus.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rw/gov/payroll/model/PaySlip$PaySlipStatus.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rw/gov/payroll/model/PaySlip.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rw/gov/payroll/model/PaySlip.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rw/gov/payroll/repository/DeductionRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rw/gov/payroll/repository/DeductionRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rw/gov/payroll/repository/EmployeeRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rw/gov/payroll/repository/EmployeeRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rw/gov/payroll/repository/EmploymentRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rw/gov/payroll/repository/EmploymentRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rw/gov/payroll/repository/MessageRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rw/gov/payroll/repository/MessageRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rw/gov/payroll/repository/PaySlipRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rw/gov/payroll/repository/PaySlipRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rw/gov/payroll/security/CustomUserDetailsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rw/gov/payroll/security/CustomUserDetailsService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rw/gov/payroll/security/JwtAuthenticationFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rw/gov/payroll/security/JwtAuthenticationFilter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rw/gov/payroll/security/JwtTokenUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rw/gov/payroll/security/JwtTokenUtil.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rw/gov/payroll/security/SecurityConstants.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rw/gov/payroll/security/SecurityConstants.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rw/gov/payroll/security/SecurityService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rw/gov/payroll/security/SecurityService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rw/gov/payroll/security/WebSecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rw/gov/payroll/security/WebSecurityConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rw/gov/payroll/service/DeductionService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rw/gov/payroll/service/DeductionService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rw/gov/payroll/service/EmployeeService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rw/gov/payroll/service/EmployeeService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rw/gov/payroll/service/EmploymentService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rw/gov/payroll/service/EmploymentService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rw/gov/payroll/service/MessageService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rw/gov/payroll/service/MessageService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/rw/gov/payroll/service/PayrollService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/rw/gov/payroll/service/PayrollService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/sample-users.sql" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/sample-users.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/security-testing-guide.md" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/security-testing-guide.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/testing-guide.md" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="2xlEQ4rVWH9CnnHcNzuxPnEbWFe" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.PayrollManagementSystemApplication.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "Spring Boot.PayrollManagementSystemApplication.executor": "Run",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "junie.onboarding.icon.badge.shown": "true",
+    "last_opened_file_path": "C:/Users/aimab/OneDrive/Desktop/PayrollManagementSystem",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.0",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
+    ]
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="PayrollManagementSystemApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="payroll-management-system" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="rw.gov.payroll.PayrollManagementSystemApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-fbdcb00ec9e3-intellij.indexing.shared.core-IU-251.25410.129" />
+        <option value="bundled-js-predefined-d6986cc7102b-6a121458b545-JavaScript-IU-251.25410.129" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b32aa465-968b-4eda-b32e-8d0e210c6e44" name="Changes" comment="" />
+      <created>1748504241258</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1748504241258</updated>
+      <workItem from="1748504242507" duration="17223000" />
+      <workItem from="1748599179901" duration="399000" />
+      <workItem from="1748603393705" duration="6297000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

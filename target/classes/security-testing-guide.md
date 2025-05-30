@@ -1,149 +1,107 @@
 # Security Testing Guide for Payroll Management System
 
-## Authentication and Authorization Overview
+This guide provides instructions for testing the authentication and authorization features of the Payroll Management System.
 
-The Payroll Management System uses JWT (JSON Web Token) based authentication and role-based authorization. There are three roles in the system:
+## Authentication Testing
 
-1. **ROLE_EMPLOYEE**: Basic role for employees who can view their own information
-2. **ROLE_MANAGER**: Managers can view and manage employee information
-3. **ROLE_ADMIN**: Administrators have full access to the system
+### 1. Obtaining a JWT Token
 
-## Using Swagger UI with JWT Authentication
+1. Use the `/api/auth/login` endpoint with valid credentials:
+   ```json
+   {
+     "email": "aimablebyumvuhore@gmail.com",
+     "password": "Aimable1!"
+   }
+   ```
+2. The response will contain a JWT token:
+   ```json
+   {
+     "token": "eyJhbGciOiJIUzUxMiJ9...",
+     "type": "Bearer",
+     "email": "aimablebyumvuhore@gmail.com",
+     "roles": ["ROLE_ADMIN"]
+   }
+   ```
+3. Copy the token value for use in subsequent requests.
 
-The API documentation is available through Swagger UI at `/api/swagger-ui.html`. To use authenticated endpoints:
+### 2. Using the JWT Token
 
-1. First, use the `/api/auth/login` endpoint to obtain a JWT token
-2. Click on the "Authorize" button (lock icon) at the top right of the Swagger UI
-3. In the authorization popup, enter your JWT token with the Bearer prefix: `Bearer eyJhbGciOiJIUzUxMiJ9...`
-4. Click "Authorize" and close the popup
-5. Now you can use the authenticated endpoints in Swagger UI
+1. In Swagger UI:
+   - Click the "Authorize" button at the top of the page
+   - Enter the token in the format: `Bearer eyJhbGciOiJIUzUxMiJ9...`
+   - Click "Authorize"
+
+2. In Postman or other API tools:
+   - Add an Authorization header: `Authorization: Bearer eyJhbGciOiJIUzUxMiJ9...`
+
+### 3. Testing Token Expiration
+
+1. The token expires after 24 hours (configurable in application.properties)
+2. To test expiration, you can:
+   - Wait for the token to expire naturally
+   - Modify the JWT expiration time in application.properties for testing purposes
+
+## Authorization Testing
+
+### 1. Testing Role-Based Access
+
+Test each endpoint with different user roles to verify proper authorization:
+
+#### Admin User (aimablebyumvuhore@gmail.com)
+- Should have access to all endpoints
+- Test creating, updating, and deleting resources
+
+#### Manager User (aimablebyumvuhore2@gmail.com)
+- Should have access to view all employees and manage their information
+- Should not be able to access administrative functions
+- Test accessing employee data and payroll information
+
+#### Employee User (aimablebyumvuhore3@gmail.com)
+- Should only have access to their own information
+- Should not be able to view other employees' data
+- Test accessing personal profile and payroll information
+
+### 2. Testing Access Denial
+
+1. Log in as an employee user
+2. Try to access manager or admin-only endpoints
+3. Verify that a 403 Forbidden response is returned
+
+## Security Vulnerabilities Testing
+
+### 1. CSRF Protection
+
+The application uses stateless JWT authentication, which mitigates CSRF attacks. However, you can test by:
+1. Attempting to perform state-changing operations without proper authentication
+2. Verifying that such attempts are rejected
+
+### 2. SQL Injection Testing
+
+Test input fields with SQL injection attempts:
+1. Try entering SQL commands in search fields
+2. Verify that the application properly sanitizes inputs
+
+### 3. XSS Testing
+
+Test input fields with script tags and other potentially malicious content:
+1. Try entering `<script>alert('XSS')</script>` in text fields
+2. Verify that the application properly escapes or sanitizes the input
 
 ## Sample Test Users
 
-Here are sample users you can use for testing:
+Use these credentials for testing different access levels:
 
-1. **Admin User**
-   - Email: admin@example.com
-   - Password: admin123
-   - Roles: ROLE_ADMIN
+1. Admin User:
+   - Email: aimablebyumvuhore@gmail.com
+   - Password: Aimable1!
+   - Role: ROLE_ADMIN
 
-2. **Manager User**
-   - Email: manager@example.com
-   - Password: manager123
-   - Roles: ROLE_MANAGER
+2. Manager User:
+   - Email: aimablebyumvuhore2@gmail.com
+   - Password: Aimable1!
+   - Role: ROLE_MANAGER
 
-3. **Employee User**
-   - Email: employee@example.com
-   - Password: employee123
-   - Roles: ROLE_EMPLOYEE
-
-## Testing Authentication
-
-### Step 1: Register a New User
-
-1. Send a POST request to `/api/auth/register` with the following JSON body:
-
-```json
-{
-  "firstName": "John",
-  "lastName": "Doe",
-  "email": "john.doe@example.com",
-  "password": "password123",
-  "mobile": "1234567890",
-  "dateOfBirth": "1990-01-01",
-  "roles": ["ROLE_EMPLOYEE"]
-}
-```
-
-2. You should receive a success response with status code 200.
-
-### Step 2: Login with the Registered User
-
-1. Send a POST request to `/api/auth/login` with the following JSON body:
-
-```json
-{
-  "email": "john.doe@example.com",
-  "password": "password123"
-}
-```
-
-2. You should receive a response with a JWT token, user details, and roles:
-
-```json
-{
-  "status": "success",
-  "message": "Login successful",
-  "data": {
-    "token": "eyJhbGciOiJIUzUxMiJ9...",
-    "code": "EMP-XXXXXXXX",
-    "email": "john.doe@example.com",
-    "firstName": "John",
-    "lastName": "Doe",
-    "roles": ["ROLE_EMPLOYEE"]
-  }
-}
-```
-
-3. Save the token for subsequent requests.
-
-### Step 3: Access Protected Endpoint with Token
-
-1. Send a GET request to `/api/employees/me` with the Authorization header:
-   - Header: `Authorization: Bearer eyJhbGciOiJIUzUxMiJ9...`
-
-2. You should receive your employee details in the response.
-
-## Testing Authorization
-
-### Test Case 1: Employee Role Access
-
-1. Login with the employee user credentials:
-   - Email: employee@example.com
-   - Password: employee123
-
-2. Try to access the following endpoints:
-   - GET `/api/employees/me` - Should succeed (own profile)
-   - GET `/api/employees/{your-code}` - Should succeed (own profile)
-   - GET `/api/employees` - Should fail (403 Forbidden)
-   - POST `/api/employees` - Should fail (403 Forbidden)
-   - DELETE `/api/employees/{any-code}` - Should fail (403 Forbidden)
-
-### Test Case 2: Manager Role Access
-
-1. Login with the manager user credentials:
-   - Email: manager@example.com
-   - Password: manager123
-
-2. Try to access the following endpoints:
-   - GET `/api/employees` - Should succeed (list all employees)
-   - GET `/api/employees/{any-code}` - Should succeed (view any employee)
-   - POST `/api/employees` - Should succeed (create employee)
-   - PUT `/api/employees/{any-code}` - Should succeed (update any employee)
-   - DELETE `/api/employees/{any-code}` - Should fail (403 Forbidden, admin only)
-
-### Test Case 3: Admin Role Access
-
-1. Login with the admin user credentials:
-   - Email: admin@example.com
-   - Password: admin123
-
-2. Try to access the following endpoints:
-   - All endpoints should be accessible
-   - DELETE `/api/employees/{any-code}` - Should succeed (admin can delete)
-
-## JWT Token Information
-
-The JWT token contains the following claims:
-- `sub`: The subject (username/email)
-- `roles`: The user's roles
-- `iat`: Issued at timestamp
-- `exp`: Expiration timestamp
-
-You can decode the JWT token at [jwt.io](https://jwt.io/) to verify the claims.
-
-## Troubleshooting
-
-- If you receive a 401 Unauthorized error, your token may have expired. Try logging in again.
-- If you receive a 403 Forbidden error, you don't have the required role to access that resource.
-- Make sure to include the "Bearer " prefix in the Authorization header.
+3. Employee User:
+   - Email: aimablebyumvuhore3@gmail.com
+   - Password: Aimable1!
+   - Role: ROLE_EMPLOYEE
