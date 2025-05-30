@@ -138,4 +138,30 @@ public class MessageController {
             return ResponseEntity.badRequest().body(ApiResponse.error("Failed to send unsent messages: " + e.getMessage()));
         }
     }
+
+    /**
+     * Send a specific message by ID
+     */
+    @PostMapping("/send/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ResponseEntity<?> sendMessageById(@PathVariable Long id) {
+        try {
+            Optional<Message> messageOpt = messageRepository.findById(id);
+            if (!messageOpt.isPresent()) {
+                return ResponseEntity.badRequest().body(ApiResponse.error("Message not found with ID: " + id));
+            }
+
+            Message message = messageOpt.get();
+            messageService.sendEmailNotification(message);
+
+            Map<String, Object> response = new HashMap<>();
+            response.put("messageId", message.getId());
+            response.put("sent", message.getSent());
+            response.put("content", message.getContent());
+
+            return ResponseEntity.ok(ApiResponse.success("Message sent successfully", response));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(ApiResponse.error("Failed to send message: " + e.getMessage()));
+        }
+    }
 }

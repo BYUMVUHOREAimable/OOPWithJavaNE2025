@@ -43,7 +43,7 @@ public class MessageService {
     @Transactional
     public Message generateMessage(PaySlip paySlip) {
         Employee employee = paySlip.getEmployee();
-        
+
         // Format the message
         String messageContent = String.format(
                 "Dear %s, Your salary of %s/%s from %s %s has been credited to your %s account successfully.",
@@ -54,7 +54,7 @@ public class MessageService {
                 paySlip.getNetSalary(),
                 employee.getCode()
         );
-        
+
         // Create and save the message
         Message message = new Message();
         message.setEmployee(employee);
@@ -63,7 +63,7 @@ public class MessageService {
         message.setYear(paySlip.getYear());
         message.setCreatedAt(LocalDateTime.now());
         message.setSent(false);
-        
+
         return messageRepository.save(message);
     }
 
@@ -80,21 +80,25 @@ public class MessageService {
     /**
      * Send email notification for a message
      */
-    @Async
     public void sendEmailNotification(Message message) {
-        Employee employee = message.getEmployee();
-        
-        SimpleMailMessage mailMessage = new SimpleMailMessage();
-        mailMessage.setFrom(fromEmail);
-        mailMessage.setTo(employee.getEmail());
-        mailMessage.setSubject("Salary Payment Notification");
-        mailMessage.setText(message.getContent());
-        
-        emailSender.send(mailMessage);
-        
-        // Update message as sent
-        message.setSent(true);
-        messageRepository.save(message);
+        try {
+            Employee employee = message.getEmployee();
+
+            SimpleMailMessage mailMessage = new SimpleMailMessage();
+            mailMessage.setFrom(fromEmail);
+            mailMessage.setTo(employee.getEmail());
+            mailMessage.setSubject("Salary Payment Notification");
+            mailMessage.setText(message.getContent());
+
+            emailSender.send(mailMessage);
+
+            // Update message as sent
+            message.setSent(true);
+            messageRepository.save(message);
+        } catch (Exception e) {
+            // Log the error but don't rethrow it to ensure the transaction completes
+            System.err.println("Error sending email notification: " + e.getMessage());
+        }
     }
 
     /**
@@ -104,10 +108,22 @@ public class MessageService {
     @Scheduled(fixedRate = 3600000) // 1 hour in milliseconds
     @Transactional
     public void sendUnsentMessages() {
-        List<Message> unsentMessages = messageRepository.findBySent(false);
-        
-        for (Message message : unsentMessages) {
-            sendEmailNotification(message);
+        try {
+            List<Message> unsentMessages = messageRepository.findBySent(false);
+            System.out.println("Found " + unsentMessages.size() + " unsent messages to process");
+
+            for (Message message : unsentMessages) {
+                try {
+                    System.out.println("Sending message ID: " + message.getId() + " to employee: " + message.getEmployee().getCode());
+                    sendEmailNotification(message);
+                    System.out.println("Successfully sent message ID: " + message.getId());
+                } catch (Exception e) {
+                    System.err.println("Error sending message ID: " + message.getId() + " - " + e.getMessage());
+                    // Continue with the next message
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Error in sendUnsentMessages: " + e.getMessage());
         }
     }
 
